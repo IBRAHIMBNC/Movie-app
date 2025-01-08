@@ -3,21 +3,19 @@ class AppIcons {
   static const String path = 'assets/icons';
 
   //Navigation Icons
-  static const String dashboardIcon = '$path/dashboard.svg';
-  static const String watchIcon = '$path/watch.svg';
-  static const String libraryIcon = '$path/library.svg';
-  static const String moreIcon = '$path/more.svg';
+  static const String dashboard = '$path/dashboard.svg';
+  static const String watch = '$path/watch.svg';
+  static const String library = '$path/library.svg';
+  static const String more = '$path/more.svg';
 
   //Seating Icons
-  static const String seatSelectedIcon = '$path/selected.svg';
-  static const String seatDisabledIcon = '$path/na.svg';
-  static const String seatVipIcon = '$path/vip.svg';
-  static const String seatRegularIcon = '$path/regular.svg';
+  static const String seatSelected = '$path/selected.svg';
+  static const String seatDisabled = '$path/na.svg';
+  static const String seatVip = '$path/vip.svg';
+  static const String seatRegular = '$path/regular.svg';
 
   //Others
-  static const String searchIcon = '$path/search.svg';
-  static const String screenIcon = '$path/screen.svg';
-
-  // Seats SVG
-  static const String hallSeatsIcon = '$path/hall_seats.svg';
+  static const String search = '$path/search.svg';
+  static const String screen = '$path/screen.png';
+  static const String hallSeats = '$path/hall_seats.png';
 }

@@ -36,7 +36,7 @@ class HallDetailCard extends StatelessWidget {
             height: 0.16.sh,
             width: 0.6.sw,
             border: BorderSide(color: AppColors.skyBlueColor),
-            child: SvgPicture.asset(AppIcons.dashboardIcon),
+            child: SvgPicture.asset(AppIcons.dashboard),
           ),
           spacing12,
           Row(

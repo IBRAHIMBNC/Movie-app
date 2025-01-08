@@ -22,7 +22,7 @@ class MovieSearchView extends GetView<MovieSearchController> {
         toolbarHeight: 60.h,
         title: CustomTextField(
           controller: controller.searchController,
-          prefixIcon: AppIcons.searchIcon,
+          prefixIcon: AppIcons.search,
           hinText: 'TV shows, movies and more',
           bgColor: AppColors.lightGreyColor.withOpacity(0.3),
           onChanged: controller.onSearchKeyChange,
@@ -75,13 +75,6 @@ class MovieSearchView extends GetView<MovieSearchController> {
               ],
             );
           }
-          // if (controller.isTyping.value && controller.searchQuery.isNotEmpty) {
-          //   return ListView.separated(
-          //     itemCount: 10,
-          //     separatorBuilder: (context, index) => spacing12,
-          //     itemBuilder: (context, index) => SearchMovieCard(),
-          //   );
-          // }
         }),
       ),
     );

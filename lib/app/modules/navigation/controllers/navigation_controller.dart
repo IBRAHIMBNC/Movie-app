@@ -15,19 +15,4 @@ class NavigationController extends GetxController {
         return CoomingSoon();
     }
   }
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }

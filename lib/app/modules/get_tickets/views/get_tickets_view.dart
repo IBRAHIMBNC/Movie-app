@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/app/constants/app_colors.dart';
 import 'package:movie_app/app/constants/app_icons.dart';
@@ -131,7 +130,7 @@ class HallDetailCard extends StatelessWidget {
                 color: !isSelected
                     ? AppColors.lightGreyColor
                     : AppColors.skyBlueColor),
-            child: SvgPicture.asset(AppIcons.hallSeatsIcon),
+            child: Image.asset(AppIcons.hallSeats),
           ),
           spacing12,
           Row(

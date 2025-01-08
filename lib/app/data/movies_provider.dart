@@ -10,22 +10,28 @@ import 'package:movie_app/app/data/models/genre.dart';
 import 'package:movie_app/app/data/models/movie.dart';
 import 'package:movie_app/app/data/services/api_service.dart';
 
-class RepositoryProvider extends GetxController {
+class MoviesProvider extends GetxController {
   final RxList<Genre> allGenres = RxList();
   final RxList<Movie> searchedMovies = RxList();
   RxBool isSearchLoading = false.obs;
-
   final _logger = Logger();
-
   final PagingController<int, Movie> moviesPagingController =
       PagingController<int, Movie>(firstPageKey: 1);
 
-  searchMovies(String query) {
-    isSearchLoading.value = true;
-    _fetchSearchedMoviesPage(1, query);
+  @override
+  void onInit() {
+    super.onInit();
+    fetchAllGenres();
+    resetMoviesPagingController();
   }
 
-  fetchAllGenres() async {
+  @override
+  void dispose() {
+    moviesPagingController.dispose();
+    super.dispose();
+  }
+
+  Future<void> fetchAllGenres() async {
     final response = await ApiService.get(endPoint: ApiEndPoints.genreList);
     if (response != null) {
       response.data['genres'].forEach((genre) {
@@ -42,31 +48,12 @@ class RepositoryProvider extends GetxController {
     }
   }
 
-  fetchUpcomingMoviesPage(int page) async {
-    final response = await ApiService.get(
-        endPoint: ApiEndPoints.upcomingMovies, params: {"page": page});
-
-    if (response != null) {
-      List<Movie> newMovies = [];
-      int totalPages = response.data['total_pages'];
-      response.data['results'].forEach((movie) {
-        newMovies.add(Movie.fromMap(movie));
-      });
-      final isLastPage = page == totalPages;
-
-      if (isLastPage) {
-        moviesPagingController.appendLastPage(newMovies);
-      } else {
-        final nextPageKey = page + 1;
-        moviesPagingController.appendPage(newMovies, nextPageKey);
-      }
-    } else {
-      _logger.wtf("Response is null");
-      moviesPagingController.error = "Couldn't fetch upcoming movies";
-    }
+  void searchMovies(String query) {
+    isSearchLoading.value = true;
+    _fetchSearchedMoviesPage(1, query);
   }
 
-  _fetchSearchedMoviesPage(int page, String query) async {
+  Future<void> _fetchSearchedMoviesPage(int page, String query) async {
     final response = await ApiService.get(
         endPoint: ApiEndPoints.search,
         params: {"page": page, "query": query, "language": "en-US"});
@@ -77,7 +64,7 @@ class RepositoryProvider extends GetxController {
       });
       searchedMovies.value = newMovies;
     } else {
-      _logger.wtf("Response is null");
+      _logger.f("Response is null");
       Get.snackbar(
         '',
         "Couldn't fetch searched movies",
@@ -86,24 +73,43 @@ class RepositoryProvider extends GetxController {
         colorText: AppColors.whiteColor,
       );
     }
-    isSearchLoading = false.obs;
+    isSearchLoading.value = false;
+  }
+
+  Future<void> fetchUpcomingMoviesPage(int page) async {
+    final response = await ApiService.get(
+        endPoint: ApiEndPoints.upcomingMovies, params: {"page": page});
+    if (response != null) {
+      List<Movie> newMovies = [];
+      int totalPages = response.data['total_pages'];
+      response.data['results'].forEach((movie) {
+        newMovies.add(Movie.fromMap(movie));
+      });
+      final isLastPage = page == totalPages;
+      if (isLastPage) {
+        moviesPagingController.appendLastPage(newMovies);
+      } else {
+        final nextPageKey = page + 1;
+        moviesPagingController.appendPage(newMovies, nextPageKey);
+      }
+    } else {
+      _logger.f("Response is null");
+      moviesPagingController.error = "Couldn't fetch upcoming movies";
+    }
   }
 
   Future<String?> fetchMovieTrailer(int movieId) async {
-    final response = await ApiService.get(
-      endPoint: "movie/$movieId/videos",
-    );
+    final response = await ApiService.get(endPoint: "movie/$movieId/videos");
     if (response != null) {
-      if (response.data['results'].length > 0) {
+      if (response.data['results'].isNotEmpty) {
         var trailerKey = response.data['results'][0]['key'];
         return trailerKey;
       } else {
-        _logger.wtf("No trailer found");
+        _logger.f("No trailer found");
         return null;
       }
     } else {
-      _logger.wtf("Response is null");
-
+      _logger.f("Response is null");
       return null;
     }
   }
@@ -119,16 +125,12 @@ class RepositoryProvider extends GetxController {
       });
       if (response != null) {
         var result = response.data['results'];
-
         var imagePath =
             result[Random().nextInt(result.length)]['backdrop_path'];
-
         return ksImageBaseUrl + imagePath;
       }
     } catch (e) {
-      // logger.e(e);
-    } finally {
-      // setBusy(false);
+      _logger.e(e);
     }
     return null;
   }
@@ -137,7 +139,7 @@ class RepositoryProvider extends GetxController {
     List<String> images = [];
     final response = await ApiService.get(endPoint: "movie/$movieId/images");
     if (response != null) {
-      if (response.data['backdrops'].length > 0) {
+      if (response.data['backdrops'].isNotEmpty) {
         response.data['backdrops'].forEach((backdrop) {
           images.add(ksImageBaseUrl + backdrop['file_path']);
         });
@@ -146,31 +148,16 @@ class RepositoryProvider extends GetxController {
         return [];
       }
     } else {
-      _logger.wtf("Response is null");
-
+      _logger.f("Response is null");
       return null;
     }
   }
 
-  resetMoviesPagingController() {
+  void resetMoviesPagingController() {
     moviesPagingController.addPageRequestListener((pageKey) {
       fetchUpcomingMoviesPage(pageKey);
     });
     moviesPagingController.refresh();
-  }
-
-  @override
-  void onInit() {
-    // fetchUpcomingMoviesPage(1);
-    fetchAllGenres();
-    resetMoviesPagingController();
-    super.onInit();
-  }
-
-  @override
-  void dispose() {
-    moviesPagingController.dispose();
-    super.dispose();
   }
 
   List<Genre> getGenresByIds(List<int> ids) {

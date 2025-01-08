@@ -38,21 +38,20 @@ class SeatBookingView extends GetView<SeatBookingController> {
             const SizedBox(
               height: 16,
             ),
-            SvgPicture.asset(AppIcons.screenIcon),
-            Text(
-              "SCREEN",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
-                  ?.copyWith(color: Colors.grey, fontSize: 8.sp),
+            Image.asset(
+              AppIcons.screen,
+              width: 0.9.sw,
             ),
+            // MyText.title(
+            //   "Screen",
+            // ),
             const SizedBox(
               height: 32,
             ),
             Flexible(
               child: SizedBox(
                 width: double.infinity,
-                height: 500,
+                height: 400.h,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: GetBuilder<SeatBookingController>(
@@ -62,97 +61,89 @@ class SeatBookingView extends GetView<SeatBookingController> {
                         rows: 10,
                         cols: 26,
                         seatSvgSize: 20,
-                        pathSelectedSeat: AppIcons.seatSelectedIcon,
-                        pathDisabledSeat: AppIcons.seatDisabledIcon,
-                        pathSoldSeat: AppIcons.seatVipIcon,
-                        pathUnSelectedSeat: AppIcons.seatRegularIcon,
-                        currentSeatsState: controller.seatArrangement,
+                        pathSelectedSeat: AppIcons.seatSelected,
+                        pathDisabledSeat: AppIcons.seatDisabled,
+                        pathSoldSeat: AppIcons.seatVip,
+                        pathUnSelectedSeat: AppIcons.seatRegular,
+                        currentSeatsState: controller.generateSeatArrangement,
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: kPadding20.w,
-                right: 100.w,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _iconGuide(
-                        icon: AppIcons.seatSelectedIcon,
-                        text: "Selected",
-                      ),
-                      _iconGuide(
-                        icon: AppIcons.seatDisabledIcon,
-                        text: "Not Available",
-                      ),
-                    ],
-                  ),
-                  10.verticalSpace,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _iconGuide(
-                        icon: AppIcons.seatVipIcon,
-                        text: "VIP(\$150)",
-                      ),
-                      _iconGuide(
-                        icon: AppIcons.seatRegularIcon,
-                        text: "Regular(\$50)",
-                      ),
-                    ],
-                  ),
-                  20.verticalSpace,
-                  // Container(
-                  //   padding: const EdgeInsets.all(10),
-                  //   decoration: BoxDecoration(
-                  //       color: AppColors.lightGreyColor.withOpacity(0.6),
-                  //       borderRadius: BorderRadius.circular(5)),
-                  //   child: Text(
-                  //       "Selected Seats: ${viewModel.selectedSeats.length}"),
-                  // ),
-                  20.verticalSpace,
-                ],
-              ),
-            ),
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 0.11.sh,
+      bottomNavigationBar: MyContainer(
+        color: AppColors.whiteColor,
+        height: 0.3.sh,
         padding: kPadding20.all,
-        child: Row(
+        child: Column(
           children: [
-            Expanded(
-              child: MyContainer(
-                radius: 12.r,
-                padding: kPadding16.hp,
-                alignment: Alignment.centerLeft,
-                color: AppColors.whiteColor,
-                onTap: () => Get.toNamed(Routes.GET_TICKETS),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    MyText.description('Total Price', fontSize: 10),
-                    spacing4,
-                    MyText.title('\$50.00', fontSize: 14),
-                  ],
-                ),
+            Padding(
+              padding: kPadding80.right,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _iconGuide(
+                    icon: AppIcons.seatSelected,
+                    text: "Selected",
+                  ),
+                  _iconGuide(
+                    icon: AppIcons.seatDisabled,
+                    text: "Not Available",
+                  ),
+                ],
               ),
             ),
             spacing12,
-            SizedBox(
-              width: 0.56.sw,
-              child: ElevatedButton(
-                  onPressed: () => Get.toNamed(Routes.SEAT_BOOKING),
-                  child: Text('Proceed To Pay')),
+            Padding(
+              padding: kPadding80.right,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _iconGuide(
+                    icon: AppIcons.seatVip,
+                    text: "VIP(\$150)",
+                  ),
+                  _iconGuide(
+                    icon: AppIcons.seatRegular,
+                    text: "Regular(\$50)",
+                  ),
+                ],
+              ),
+            ),
+            Spacer(),
+            Row(
+              children: [
+                Expanded(
+                  child: MyContainer(
+                    radius: 12.r,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: kPadding12.w, vertical: kPadding8.h),
+                    alignment: Alignment.centerLeft,
+                    color: AppColors.lightGreyColor.withOpacity(0.5),
+                    onTap: () => Get.toNamed(Routes.GET_TICKETS),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        MyText.description('Total Price', fontSize: 10),
+                        spacing4,
+                        MyText.title('\$50.00', fontSize: 14),
+                      ],
+                    ),
+                  ),
+                ),
+                spacing12,
+                SizedBox(
+                  width: 0.56.sw,
+                  child: ElevatedButton(
+                      onPressed: () => Get.toNamed(Routes.SEAT_BOOKING),
+                      child: Text('Proceed To Pay')),
+                ),
+              ],
             ),
           ],
         ),

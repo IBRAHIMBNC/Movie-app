@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/app/constants/app_colors.dart';
 import 'package:movie_app/app/data/models/movie.dart';
-import 'package:movie_app/app/data/repository_provider.dart';
+import 'package:movie_app/app/data/movies_provider.dart';
 import 'package:movie_app/app/routes/app_pages.dart';
 import 'package:movie_app/app/utils/ui_helpers.dart';
 import 'package:movie_app/app/widgets/my_container.dart';
@@ -16,8 +16,7 @@ class SearchMovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final genres =
-        Get.find<RepositoryProvider>().getGenresByIds(movie.genreIds);
+    final genres = Get.find<MoviesProvider>().getGenresByIds(movie.genreIds);
     return MyContainer(
       onTap: () => Get.toNamed(Routes.MOVIE_DETAILS, arguments: movie),
       child: Row(

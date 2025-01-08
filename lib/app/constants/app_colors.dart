@@ -23,6 +23,7 @@ final blackGradient = LinearGradient(colors: [
   Colors.transparent,
   AppColors.blackColor.withOpacity(0.1)
 ], begin: Alignment.bottomCenter, end: Alignment.topCenter);
+
 const List<Color> genreColors = const [
   Colors.red,
   Colors.blue,

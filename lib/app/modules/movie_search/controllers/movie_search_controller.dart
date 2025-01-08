@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/app/data/models/genre.dart';
 import 'package:movie_app/app/data/models/movie.dart';
-import 'package:movie_app/app/data/repository_provider.dart';
+import 'package:movie_app/app/data/movies_provider.dart';
 import 'package:movie_app/app/modules/watch/controllers/watch_controller.dart';
 
 class MovieSearchController extends GetxController {
-  final _repositoryProvider = Get.find<RepositoryProvider>();
+  final _repositoryProvider = Get.find<MoviesProvider>();
   final TextEditingController searchController = TextEditingController();
   RxList<Movie> get searchedMovies => _repositoryProvider.searchedMovies;
 

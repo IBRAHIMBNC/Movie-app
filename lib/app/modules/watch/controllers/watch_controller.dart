@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:movie_app/app/data/models/movie.dart';
-import 'package:movie_app/app/data/repository_provider.dart';
+import 'package:movie_app/app/data/movies_provider.dart';
 
 class WatchController extends GetxController {
-  final _repositoryProvider = Get.find<RepositoryProvider>();
+  final _repositoryProvider = Get.find<MoviesProvider>();
 
   bool _isSearching = false;
 

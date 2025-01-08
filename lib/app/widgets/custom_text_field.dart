@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/app/constants/app_colors.dart';
+import 'package:movie_app/app/constants/app_strings.dart';
 import 'package:movie_app/app/utils/ui_helpers.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -130,7 +130,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           onChanged: (value) => widget.onChanged?.call(value),
           readOnly: widget.readOnly,
           maxLines: widget.lines ?? 1,
-          style: GoogleFonts.poppins(
+          style: TextStyle(
+              fontFamily: ksPoppinsFont,
               fontSize: 16.sp,
               color: widget.fontColor ??
                   Theme.of(context).textTheme.bodyMedium!.color,
@@ -156,10 +157,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ),
               filled: true,
               fillColor: widget.bgColor ?? AppColors.lightGreyColor,
-              hintStyle: GoogleFonts.poppins(
-                  fontSize: 14.sp, color: AppColors.greyColor),
+              hintStyle: TextStyle(
+                  fontFamily: ksPoppinsFont,
+                  fontSize: 14.sp,
+                  color: AppColors.greyColor),
               hintText: widget.hinText,
-              errorStyle: GoogleFonts.poppins(fontSize: 12.sp),
+              errorStyle: TextStyle(fontFamily: ksPoppinsFont, fontSize: 12.sp),
               constraints: BoxConstraints(
                 minHeight: widget.size.height.h,
               ),

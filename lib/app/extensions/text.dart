@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_app/app/constants/app_strings.dart';
 
 extension TextWeight on TextStyle {
   myCopyWith({
@@ -16,7 +16,7 @@ extension TextWeight on TextStyle {
       fontWeight: fontWeight ?? this.fontWeight,
       color: color ?? this.color,
       height: height ?? this.height,
-      fontFamily: GoogleFonts.poppins().fontFamily,
+      fontFamily: ksPoppinsFont,
     );
   }
 }

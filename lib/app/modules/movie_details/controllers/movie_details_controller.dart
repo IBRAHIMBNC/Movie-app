@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:movie_app/app/data/models/genre.dart';
 import 'package:movie_app/app/data/models/movie.dart';
-import 'package:movie_app/app/data/repository_provider.dart';
+import 'package:movie_app/app/data/movies_provider.dart';
 import 'package:movie_app/app/routes/app_pages.dart';
 
 class MovieDetailsController extends GetxController {
   final movie = Get.arguments as Movie;
-  final _repositoryProvider = Get.find<RepositoryProvider>();
+  final _repositoryProvider = Get.find<MoviesProvider>();
   final RxBool isTrailerLoading = false.obs;
   final RxBool isImagesLoading = false.obs;
   final List<String> images = [];

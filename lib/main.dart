@@ -18,12 +18,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(_designWidth, _designHeight),
-      builder: (context, child) => GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Application",
-        theme: AppTheme.lightTheme,
-        initialRoute: AppPages.INITIAL,
-        getPages: AppPages.routes,
+      builder: (context, child) => MediaQuery(
+        data:
+            MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
+        child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "Application",
+          theme: AppTheme.lightTheme,
+          initialRoute: AppPages.INITIAL,
+          getPages: AppPages.routes,
+        ),
       ),
     );
   }

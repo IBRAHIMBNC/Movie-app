@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/app/constants/app_colors.dart';
-import 'package:movie_app/app/constants/app_textStyles.dart';
+import 'package:movie_app/app/constants/app_strings.dart';
+import 'package:movie_app/app/constants/app_text_styles.dart';
 
 class MyText extends StatelessWidget {
   final Color? color;
@@ -81,7 +81,8 @@ class MyText extends StatelessWidget {
         minFontSize: minSize ?? style?.fontSize!.round().toDouble() ?? 4,
         maxFontSize: maxSize ?? double.infinity,
         style: style ??
-            GoogleFonts.poppins(
+            TextStyle(
+              fontFamily: ksPoppinsFont,
               color: color ?? defaultColor,
               fontSize: size.sp,
               fontWeight: fontWeight,
@@ -95,7 +96,8 @@ class MyText extends StatelessWidget {
         textAlign: textAlign,
         softWrap: true,
         style: style ??
-            GoogleFonts.poppins(
+            TextStyle(
+              fontFamily: ksPoppinsFont,
               color: color ?? defaultColor,
               fontSize: size.sp,
               fontWeight: fontWeight,

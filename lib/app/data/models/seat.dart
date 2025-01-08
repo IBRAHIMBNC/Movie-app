@@ -1,16 +1,16 @@
 import 'package:equatable/equatable.dart';
 
 class MovieSeat extends Equatable {
-  final int rowI;
-  final int colI;
+  final int rowNumber;
+  final int columnNumber;
 
-  const MovieSeat({required this.rowI, required this.colI});
+  const MovieSeat({required this.rowNumber, required this.columnNumber});
 
   @override
   String toString() {
-    return '[$rowI][$colI]';
+    return '[$rowNumber][$columnNumber]';
   }
 
   @override
-  List<Object?> get props => [rowI, colI];
+  List<Object?> get props => [rowNumber, columnNumber];
 }

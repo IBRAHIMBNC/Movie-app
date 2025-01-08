@@ -76,7 +76,7 @@ class Movie extends Equatable {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'adult': adult,
       'backdropPath': backdropPath,
       'genreIds': genreIds,
@@ -102,18 +102,14 @@ class Movie extends Equatable {
 
     return Movie(
       adult: map['adult'] as bool,
-      backdropPath: map['backdrop_path'] as String?,
+      backdropPath: backdropPath,
       genreIds: List<int>.from(map['genre_ids'] ?? []),
       id: map['id'] as int,
       originalLanguage: map['original_language'] as String,
       originalTitle: map['original_title'] as String,
       overview: map['overview'] as String,
       popularity: map['popularity'] as double,
-      posterPath: map['poster_path'] as String?,
-      // releaseDate: map['release_date'].isNotEmpty
-      //     ? DateTime.parse(map['release_date'])
-      //     : DateTime.now(),
-
+      posterPath: posterPath,
       releaseDate:
           DateTime.tryParse(map['release_date'] as String) ?? DateTime.now(),
       title: map['title'] as String,

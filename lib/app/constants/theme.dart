@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/app/constants/app_colors.dart';
-import 'package:movie_app/app/constants/app_textStyles.dart';
+import 'package:movie_app/app/constants/app_strings.dart';
+import 'package:movie_app/app/constants/app_text_styles.dart';
 
 class AppTheme {
   const AppTheme._();
 
   static final lightTheme = ThemeData(
+    fontFamily: ksPoppinsFont,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         textStyle: AppTextStyles.title.copyWith(fontWeight: FontWeight.w600),
